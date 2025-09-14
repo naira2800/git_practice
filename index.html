@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas Online</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <script src="estadistica.js"></script>  
+</head>
+<body>
+    <div>
+        <h1>Estadísticas Online</h1>
+    </div>
+    <div class="valor">
+        <label>Valor:</label>
+        <input type="text" id="valor">
+        <button onclick="cantPromedio()">Registrar</button>
+    </div>
+    <div class="resultados">
+        <label>Cantidad:</label>
+        <input type="text" id="cantidad">
+        <br>
+          <label>Promedio:</label>
+        <input type="text" id="promedio">
+        <br>
+          <label>Mayor:</label>
+        <input type="text" id="mayor">
+        <br>
+        <label>Menor:</label>
+        <input type="text" id="menor">
+    </div>
+    <div id=resetPad>
+        <button onclick="reset()" id="reset">Reset</button>
+    </div>
+    
+</body>
+</html>
