@@ -1,4 +1,9 @@
-    let valores = [];
+Sentry.init({
+  dsn: "https://js.sentry-cdn.com/52cd765cdc38a1550effb3ae69fbe395.min.js",
+  tracesSampleRate: 1.0,
+});
+
+let valores = [];
 
     function cantPromedio(){
       let valor = parseFloat(document.getElementById("valor").value);
@@ -32,4 +37,5 @@
       document.getElementById("mayor").value = "";
       document.getElementById("menor").value = "";
       document.getElementById("valor").value = "";
+
     }
