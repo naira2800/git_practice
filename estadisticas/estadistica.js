@@ -1,7 +1,7 @@
-Sentry.init({
-  dsn: "https://js.sentry-cdn.com/52cd765cdc38a1550effb3ae69fbe395.min.js",
-  tracesSampleRate: 1.0,
-});
+// Sentry.init({
+//   dsn: "https://js.sentry-cdn.com/52cd765cdc38a1550effb3ae69fbe395.min.js",
+//   tracesSampleRate: 1.0,
+// });
 
 let valores = [];
 
@@ -39,3 +39,4 @@ let valores = [];
       document.getElementById("valor").value = "";
 
     }
+
