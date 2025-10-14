@@ -36,7 +36,10 @@
     <div id=resetPad>
         <button onclick="reset()" id="reset">Reset</button>
     </div>
-    
-</body>
+    <button onclick="Sentry.captureException(new Error('Error de prueba en Render'))">
+    Probar Sentry
+    </button>
+  </body>
 
 </html>
+
