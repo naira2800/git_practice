@@ -1,3 +1,37 @@
+<!-- Opción A: Loader Script recomendado por Sentry (si lo ves en tu proyecto) -->
+<script
+  src="https://js.sentry-cdn.com/4510188418039808.min.js"
+  crossorigin="anonymous"
+  data-dsn="https://REEMPLAZA_XXX.ingest.sentry.io/REEMPLAZA_PROYECTO"
+  data-traces-sample-rate="1.0"
+  data-replays-session-sample-rate="0.1"
+  data-replays-on-error-sample-rate="1.0"
+  data-environment="production"
+></script>
+
+<!-- Opción B: SDK estándar desde CDN + init manual -->
+<!-- 1) Cargar el bundle del navegador (tracing + replay). Sentry te dará la URL exacta. -->
+<script
+  src="https://browser.sentry-cdn.com/8.x.x/bundle.tracing.replay.min.js"
+  crossorigin="anonymous"
+></script>
+<script>
+  Sentry.init({
+    dsn: "https://REEMPLAZA_XXX.ingest.sentry.io/REEMPLAZA_PROYECTO",
+    environment: "production",
+    // Rendimiento (APM)
+    tracesSampleRate: 1.0,
+    // Session Replay (opcional)
+    replaysSessionSampleRate: 0.1,   // 10% de sesiones
+    replaysOnErrorSampleRate: 1.0,   // 100% cuando hay error
+    // Limitar propagación de trazas a tu dominio en Render
+    tracePropagationTargets: ["git-practice-sca3.onrender.com"],
+    // Opcional: identificar una versión/release (útil para sourcemaps)
+    release: "git-practice-sca3@1.0.0"
+  });
+</script>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -39,5 +73,6 @@
   </body>
 
 </html>
+
 
 
