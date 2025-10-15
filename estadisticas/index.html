@@ -1,5 +1,3 @@
-<!DOCTYPE html>
-<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,54 +5,28 @@
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- Sentry SDK por CDN (una sola vez) -->
+  <!-- Sentry SDK por CDN -->
   <script src="https://browser.sentry-cdn.com/8.37.1/bundle.tracing.replay.min.js" crossorigin="anonymous"></script>
   <script>
     Sentry.init({
       dsn: "https://c34bccc4a810213eb123749850a7a1db@o4510187960795136.ingest.us.sentry.io/4510188418039808",
       environment: "production",
+      debug: true,                   // <— activa logs del SDK en consola
+      sampleRate: 1.0,               // <— asegura 100% de eventos de error
       tracesSampleRate: 1.0,
       replaysSessionSampleRate: 0.1,
       replaysOnErrorSampleRate: 1.0,
       tracePropagationTargets: ["git-practice-sca3.onrender.com"],
       release: "git-practice-sca3@1.0.0"
     });
+
+    // Confirma que el SDK está cargado
+    console.log("Sentry SDK version:", Sentry.getCurrentHub().getClient()?.getOptions()?.sdk?.version || "unknown");
+
+    // Envía un evento inmediatamente para probar
+    Sentry.captureException(new Error("BOOT_TEST: Sentry envió un error al cargar la página"));
   </script>
 
-  <!-- Tus scripts (si alguno usa Sentry, mejor cargarlo DESPUÉS del init) -->
+  <!-- Tus scripts después del init -->
   <script src="estadistica.js" defer></script>
 </head>
-<body>
-  <div>
-    <h1>Estadísticas Online</h1>
-  </div>
-
-  <div class="valor">
-    <label>Valor:</label>
-    <input type="text" id="valor" />
-    <button onclick="cantPromedio()">Registrar</button>
-  </div>
-
-  <div class="resultados">
-    <label>Cantidad:</label>
-    <input type="text" id="cantidad" />
-    <br />
-    <label>Promedio:</label>
-    <input type="text" id="promedio" />
-    <br />
-    <label>Mayor:</label>
-    <input type="text" id="mayor" />
-    <br />
-    <label>Menor:</label>
-    <input type="text" id="menor" />
-  </div>
-
-  <div id="resetPad">
-    <button onclick="reset()" id="reset">Reset</button>
-  </div>
-
-  <button onclick="Sentry.captureException(new Error('Error de prueba en Render'))">
-    Probar Sentry
-  </button>
-</body>
-</html>
