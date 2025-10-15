@@ -1,79 +1,60 @@
-<!-- Opción A: Loader Script recomendado por Sentry (si lo ves en tu proyecto) -->
-<script
-  src="https://js.sentry-cdn.com/4510188418039808.min.js"
-  crossorigin="anonymous"
-  data-dsn="https://REEMPLAZA_XXX.ingest.sentry.io/REEMPLAZA_PROYECTO"
-  data-traces-sample-rate="1.0"
-  data-replays-session-sample-rate="0.1"
-  data-replays-on-error-sample-rate="1.0"
-  data-environment="production"
-></script>
-
-<!-- Opción B: SDK estándar desde CDN + init manual -->
-<!-- 1) Cargar el bundle del navegador (tracing + replay). Sentry te dará la URL exacta. -->
-<script
-  src="https://browser.sentry-cdn.com/8.x.x/bundle.tracing.replay.min.js"
-  crossorigin="anonymous"
-></script>
-<script>
-  Sentry.init({
-    dsn: "https://c34bccc4a810213eb123749850a7a1db@o4510187960795136.ingest.us.sentry.io/4510188418039808",
-    environment: "production",
-    // Rendimiento (APM)
-    tracesSampleRate: 1.0,
-    // Session Replay (opcional)
-    replaysSessionSampleRate: 0.1,   // 10% de sesiones
-    replaysOnErrorSampleRate: 1.0,   // 100% cuando hay error
-    // Limitar propagación de trazas a tu dominio en Render
-    tracePropagationTargets: ["git-practice-sca3.onrender.com"],
-    // Opcional: identificar una versión/release (útil para sourcemaps)
-    release: "git-practice-sca3@1.0.0"
-  });
-</script>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estadísticas Online</title>
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" type="text/css" href="styles.css">
-    <script src="estadistica.js"></script>  
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estadísticas Online</title>
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Sentry SDK por CDN (una sola vez) -->
+  <script src="https://browser.sentry-cdn.com/8.37.1/bundle.tracing.replay.min.js" crossorigin="anonymous"></script>
+  <script>
+    Sentry.init({
+      dsn: "https://c34bccc4a810213eb123749850a7a1db@o4510187960795136.ingest.us.sentry.io/4510188418039808",
+      environment: "production",
+      tracesSampleRate: 1.0,
+      replaysSessionSampleRate: 0.1,
+      replaysOnErrorSampleRate: 1.0,
+      tracePropagationTargets: ["git-practice-sca3.onrender.com"],
+      release: "git-practice-sca3@1.0.0"
+    });
+  </script>
+
+  <!-- Tus scripts (si alguno usa Sentry, mejor cargarlo DESPUÉS del init) -->
+  <script src="estadistica.js" defer></script>
 </head>
 <body>
-    <div>
-        <h1>Estadísticas Online</h1>
-    </div>
-    <div class="valor">
-        <label>Valor:</label>
-        <input type="text" id="valor">
-        <button onclick="cantPromedio()">Registrar</button>
-    </div>
-    <div class="resultados">
-        <label>Cantidad:</label>
-        <input type="text" id="cantidad">
-        <br>
-          <label>Promedio:</label>
-        <input type="text" id="promedio">
-        <br>
-          <label>Mayor:</label>
-        <input type="text" id="mayor">
-        <br>
-        <label>Menor:</label>
-        <input type="text" id="menor">
-    </div>
-    <div id=resetPad>
-        <button onclick="reset()" id="reset">Reset</button>
-    </div>
-    <button onclick="Sentry.captureException(new Error('Error de prueba en Render'))">
+  <div>
+    <h1>Estadísticas Online</h1>
+  </div>
+
+  <div class="valor">
+    <label>Valor:</label>
+    <input type="text" id="valor" />
+    <button onclick="cantPromedio()">Registrar</button>
+  </div>
+
+  <div class="resultados">
+    <label>Cantidad:</label>
+    <input type="text" id="cantidad" />
+    <br />
+    <label>Promedio:</label>
+    <input type="text" id="promedio" />
+    <br />
+    <label>Mayor:</label>
+    <input type="text" id="mayor" />
+    <br />
+    <label>Menor:</label>
+    <input type="text" id="menor" />
+  </div>
+
+  <div id="resetPad">
+    <button onclick="reset()" id="reset">Reset</button>
+  </div>
+
+  <button onclick="Sentry.captureException(new Error('Error de prueba en Render'))">
     Probar Sentry
-    </button>
-  </body>
-
+  </button>
+</body>
 </html>
-
-
-
-
