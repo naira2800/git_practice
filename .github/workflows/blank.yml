@@ -39,6 +39,6 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: build-artifact         # nombre con el que aparecerá en la pestaña "Actions"
-          path: dist/**                # ruta de los archivos/carpeta a subir
+          path: artifact.txt               # ruta de los archivos/carpeta a subir
           if-no-files-found: ignore    # evita que falle si la carpeta no existe
         
