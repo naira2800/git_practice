@@ -36,10 +36,9 @@ jobs:
           echo test, and deploy your project.
           
       - name: Upload a Build Artifact
-        uses: actions/upload-artifact@v4.6.2
+        uses: actions/upload-artifact@v4
         with:
-          name: dist
-          path: dist/**
-          if-no-files-found: error   # opciones: error | warn | ignore
-          retention-days: 7          # opcional (por defecto 90)
+          name: build-artifact         # nombre con el que aparecerá en la pestaña "Actions"
+          path: dist/**                # ruta de los archivos/carpeta a subir
+          if-no-files-found: ignore    # evita que falle si la carpeta no existe
         
