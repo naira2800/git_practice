@@ -35,10 +35,24 @@ jobs:
           echo Add other actions to build,
           echo test, and deploy your project.
           
-      - name: Upload a Build Artifact
+      # 1) Verificar dónde estamos y qué hay
+      - name: Mostrar workspace y archivos
+        run: |
+          pwd
+          ls -la
+
+      # 2) Crear el archivo a subir
+      - name: Generar artifact.txt
+        run: |
+          echo "Hola, artifact 👋" > artifact.txt
+          ls -la artifact.txt
+
+      # 3) Subir el artifact (fallar si no existe)
+      - name: Subir artifact.txt
         uses: actions/upload-artifact@v4
         with:
-          name: build-artifact         # nombre con el que aparecerá en la pestaña "Actions"
-          path: artifact.txt               # ruta de los archivos/carpeta a subir
-          if-no-files-found: ignore    # evita que falle si la carpeta no existe
+          name: build-artifact
+          path: artifact.txt
+          if-no-files-found: error
+
         
